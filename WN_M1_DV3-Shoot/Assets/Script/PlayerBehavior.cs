@@ -7,6 +7,8 @@ public class PlayerBehaviour : MonoBehaviour
     public float moveSpeed = 10f;
     public float rotateSpeed = 75f;
 
+    public float jumpVelocity = 5f;
+
     private float vInput;
     private float hInput;
 
@@ -40,5 +42,10 @@ public class PlayerBehaviour : MonoBehaviour
         _rb.MovePosition(this.transform.position + this.transform.forward * vInput * Time.fixedDeltaTime);
 
         _rb.MoveRotation(_rb.rotation * angleRot);
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            _rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
+        }
     }
 }
