@@ -8,10 +8,11 @@ public class PlayerBehaviour : MonoBehaviour
     public float rotateSpeed = 75f;
 
     public float jumpVelocity = 5f;
-
+    public float distanceToGround = 0.1f;
+    public LayerMask groundLayer;
     private float vInput;
     private float hInput;
-
+    private CapsuleCollider _col;
     // 1
     private Rigidbody _rb;
 
@@ -20,6 +21,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         // 3
         _rb = GetComponent<Rigidbody>();
+        _col = GetComponent<CapsuleCollider>();
     }
 
     void Update()
@@ -43,7 +45,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         _rb.MoveRotation(_rb.rotation * angleRot);
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
             _rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
         }
