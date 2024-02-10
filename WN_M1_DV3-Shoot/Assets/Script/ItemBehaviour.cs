@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class ItemBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameBehavior gameManager;
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
+    }
     void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.name == "Player")
@@ -12,6 +17,7 @@ public class ItemBehaviour : MonoBehaviour
             Destroy(this.transform.parent.gameObject);
 
             Debug.Log("Item collected!");
+            gameManager.Items += 1;
         }
     }
 }
