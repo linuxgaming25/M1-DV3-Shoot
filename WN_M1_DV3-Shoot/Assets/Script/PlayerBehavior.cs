@@ -12,18 +12,16 @@ public class PlayerBehaviour : MonoBehaviour
 
     public LayerMask groundLayer;
 
+    private float vInput;
+    private float hInput;
+    private Rigidbody _rb;
+
+    private CapsuleCollider _col;
+    
     public GameObject bullet;
     public float bulletSpeed = 100f;
 
-    private float vInput;
-    private float hInput;
-
-    private CapsuleCollider _col;
-    // 1
-    private Rigidbody _rb;
-
-    // 2
-    private void Start()
+    void Start()
     {
         // 3
         _rb = GetComponent<Rigidbody>();
@@ -41,7 +39,7 @@ public class PlayerBehaviour : MonoBehaviour
         */
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if(Input.GetMouseButtonDown(0))
         {
@@ -69,7 +67,9 @@ public class PlayerBehaviour : MonoBehaviour
     private bool IsGrounded()
     {
         Vector3 capsuleBottom = new Vector3(_col.bounds.center.x, _col.bounds.min.y, _col.bounds.center.z);
+        
         bool grounded = Physics.CheckCapsule(_col.bounds.center, capsuleBottom, distanceToGround, groundLayer, QueryTriggerInteraction.Ignore);
+        
         return grounded;
     }
 }
