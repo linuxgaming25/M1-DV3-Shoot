@@ -18,6 +18,8 @@ public class GameBehavior : MonoBehaviour
         get { return _itemsCollected; }
 
         set { _itemsCollected = value;
+            Debug.LogFormat("Items: {0}", _itemsCollected);
+
             if(_itemsCollected >= maxItems)
             {
                 labelText = "You've found all the items!";
@@ -31,7 +33,7 @@ public class GameBehavior : MonoBehaviour
         }
     }
 
-    private int _playerHP = 3;
+    private int _playerHP = 10;
     public int HP
     {
         get { return _playerHP; }
@@ -41,6 +43,10 @@ public class GameBehavior : MonoBehaviour
     }
     void OnGUI()
     {
+        GUI.Box(new Rect(20, 20, 150, 25), "Player Health:" + _playerHP);
+        GUI.Box(new Rect(20, 50, 150, 25), "Items Collected: " + _itemsCollected);
+        GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - 50, 300, 50), labelText);
+
         if(showWinScreen)
         {
             if(GUI.Button(new Rect(Screen.width/2 - 100, Screen.height/2 - 50, 200, 100), "YOU WON!"))
