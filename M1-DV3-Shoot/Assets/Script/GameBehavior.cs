@@ -28,7 +28,7 @@ public class GameBehavior : MonoBehaviour
             }
             else
             {
-                labelText = "Item found, only " + (maxItems - _itemsCollected) + "more to go!";
+                labelText = "Item found, only " + (maxItems - _itemsCollected) + " more to go!";
             }
         }
     }
